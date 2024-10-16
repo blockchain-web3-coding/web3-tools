@@ -1,6 +1,7 @@
 import { EventListener, EventListenerConfig } from "./eventListener";
 import { TxDecoder } from "./txDecoder";
 import { ethers } from "ethers";
+import { DappUtils } from "./dappUtils";
 
 // Example ABI (replace with your contract's ABI)
 const exampleABI = [
@@ -66,3 +67,43 @@ const exampleLogs: ethers.providers.Log[] = [
 
 const decodedLogs = txDecoder.decodeLogs(exampleLogs);
 console.log("Decoded logs:", decodedLogs);
+
+// Example of using DappUtils
+const rpcUrl = "https://mainnet.infura.io/v3/YOUR-PROJECT-ID";
+const dappUtils = new DappUtils(rpcUrl);
+
+async function dappUtilsExample() {
+  try {
+    // Estimate gas for a transaction
+    const gasEstimate = await dappUtils.estimateGas(
+      "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+      "0xa9059cbb000000000000000000000000b5e5d0f8c0cba267cd3d7035d6adc8eba7df7cfd0000000000000000000000000000000000000000000000008ac7230489e80000"
+    );
+    console.log("Estimated gas:", gasEstimate.toString());
+
+    // Get current gas price
+    const gasPrice = await dappUtils.getGasPrice();
+    console.log("Current gas price:", dappUtils.weiToEther(gasPrice), "ETH");
+
+    // Check if an address is a contract
+    const isContract = await dappUtils.isContract(
+      "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    );
+    console.log("Is DAI a contract?", isContract);
+
+    // Get latest block number
+    const latestBlock = await dappUtils.getLatestBlockNumber();
+    console.log("Latest block number:", latestBlock);
+
+    // Get block details
+    const block = await dappUtils.getBlock(latestBlock);
+    console.log(
+      "Latest block timestamp:",
+      new Date(block.timestamp * 1000).toISOString()
+    );
+  } catch (error) {
+    console.error("Error in dappUtils example:", error);
+  }
+}
+
+dappUtilsExample();

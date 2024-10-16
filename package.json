@@ -1,14 +1,30 @@
 {
+  "name": "dapp-tools",
+  "version": "1.0.0",
+  "description": "A collection of tools for blockchain development and dApp creation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "example": "ts-node src/example.ts"
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "blockchain",
+    "dapp",
+    "ethereum",
+    "web3"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
-    "ethers": "5.7"
+    "ethers": "^5.7.0"
   },
   "devDependencies": {
     "typescript": "^4.5.0",
-    "ts-node": "^10.4.0",
     "@types/node": "^16.11.12"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
