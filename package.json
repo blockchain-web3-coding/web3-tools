@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "example": "ts-node src/example.ts"
+  },
+  "dependencies": {
+    "ethers": "5.7"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.0",
+    "ts-node": "^10.4.0",
+    "@types/node": "^16.11.12"
+  }
+}
